@@ -17,7 +17,6 @@ Application (with the embedded H2 database) is ready to be used ! You can access
 	Peter  
 
 ### Normal Username:
-
 	Paul
 	Jenifer
 	Jessica
@@ -25,7 +24,8 @@ Application (with the embedded H2 database) is ready to be used ! You can access
 	Chris
 	Carmel
 
-#### All User's Password: "password"
+#### All User's Password: 
+	password
 
 
 #### Java Experience:
