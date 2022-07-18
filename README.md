@@ -32,4 +32,4 @@ Application (with the embedded H2 database) is ready to be used ! You can access
 
 - Over 13+ years of professional IT experience delivering enterprise solutions in Automobile, Retail, E-commerce, and Media domains.
 - Expertise in application designing, framework creating, and development with an innovative concept for the next evolutionary phase using Java/J2EE technology stacks.
-- I have been working in Spring Boot & Spring MVC for 5 years.
+- I have been working in Spring Boot for 5 years.
