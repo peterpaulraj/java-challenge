@@ -12,12 +12,17 @@ import com.hazelcast.config.MapConfig;
 import com.hazelcast.config.MaxSizeConfig;
 
 /**
+ * Cache Configuration
+ * 
  * @author Peter
  *
  */
 @Configuration
 public class HazelcastCacheConfig {
 
+	/**
+	 * Hazelcast Cache Configuration
+	 */
 	@Bean
 	public Config hazelcastConfig() {
 		return new Config().setInstanceName("hazelcast-instance")

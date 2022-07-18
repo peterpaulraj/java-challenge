@@ -19,7 +19,7 @@ import jp.co.axa.apidemo.vo.CommonVo;
  *
  */
 @Component
-public class CommonUtil {
+public final class CommonUtil {
 
 	private static final Logger logger = LoggerFactory.getLogger(CommonUtil.class);
 

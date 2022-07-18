@@ -11,6 +11,8 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,9 +29,12 @@ import jp.co.axa.apidemo.util.CommonUtil;
 import jp.co.axa.apidemo.vo.EmployeeVo;
 
 /**
+ * Handle with employee operations.
+ * 
  * @author Peter
  *
  */
+@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/api/v1")
 public class EmployeeController {
@@ -43,6 +48,7 @@ public class EmployeeController {
 	 * @return employeeList ResponseEntity
 	 */
 	@GetMapping("/employees")
+	@PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<List<EmployeeVo>> getEmployees() {
 		List<EmployeeVo> empList = new ArrayList<>();
 		try {
@@ -65,6 +71,7 @@ public class EmployeeController {
 	 * @return employeeVo ResponseEntity
 	 */
 	@GetMapping("/employees/{employeeId}")
+	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
 	public ResponseEntity<EmployeeVo> getEmployeeById(@PathVariable(value = "employeeId") Long employeeId) {
 		EmployeeVo employeeVo = new EmployeeVo();
 		try {
@@ -79,8 +86,15 @@ public class EmployeeController {
 		return new ResponseEntity<>(employeeVo, HttpStatus.OK);
 	}
 
+	/**
+	 * Create employee information.
+	 * 
+	 * @param newEmployee newEmployee
+	 * @return employeeVo ResponseEntity
+	 */
 	@PostMapping("/employees")
-	public ResponseEntity<EmployeeVo> createEmployee(@RequestBody EmployeeVo newEmployee) {
+	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+	public ResponseEntity<EmployeeVo> createEmployeeDetails(@RequestBody EmployeeVo newEmployee) {
 		EmployeeVo employeeVo = new EmployeeVo();
 		Employee employee = new Employee();
 		try {
@@ -98,7 +112,14 @@ public class EmployeeController {
 		return new ResponseEntity<>(employeeVo, HttpStatus.CREATED);
 	}
 
+	/**
+	 * Delete the employee information by employeeId
+	 * 
+	 * @param employeeId Long
+	 * @return employeeVo ResponseEntity
+	 */
 	@DeleteMapping("/employees/{employeeId}")
+	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
 	public ResponseEntity<Long> deleteEmployeeById(@PathVariable(value = "employeeId") Long employeeId) {
 		try {
 			Boolean isRemoved = employeeService.deleteEmployeeById(employeeId);
@@ -112,7 +133,14 @@ public class EmployeeController {
 		return new ResponseEntity<>(employeeId, HttpStatus.OK);
 	}
 
+	/**
+	 * Delete all the employee details
+	 * 
+	 * @return HttpStatus ResponseEntity
+	 */
+
 	@DeleteMapping("/employees")
+	@PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<HttpStatus> deleteAllEmployee() {
 		try {
 			Boolean isRemoved = employeeService.deleteAllEmployee();
@@ -125,7 +153,15 @@ public class EmployeeController {
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 
+	/**
+	 * Update the employee information by employeeId
+	 * 
+	 * @param employeeId Long
+	 * @return employeeVo ResponseEntity
+	 */
+
 	@PutMapping("/employees/{employeeId}")
+	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
 	public ResponseEntity<EmployeeVo> updateEmployee(@PathVariable(value = "employeeId") Long employeeId,
 			@Valid @RequestBody EmployeeVo updateEmployee) {
 

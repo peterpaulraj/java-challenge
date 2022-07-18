@@ -8,6 +8,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cache.annotation.EnableCaching;
 
 /**
+ * Spring boot - Application main class
+ * 
  * @author Peter
  *
  */

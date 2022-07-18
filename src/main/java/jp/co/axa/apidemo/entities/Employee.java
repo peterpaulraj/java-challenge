@@ -20,7 +20,7 @@ public class Employee implements java.io.Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private Long employeeId;
 
 	@Column(name = "EMP_NAME")
