@@ -11,7 +11,7 @@ Application (with the embedded H2 database) is ready to be used ! You can access
 
 
 
-### Axa Demo Lgoin Info:
+### Axa Demo Login Information:
 
 #### Admin Username: 
 	Peter  
